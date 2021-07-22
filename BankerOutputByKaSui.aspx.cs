@@ -66,8 +66,8 @@ namespace BankerWeb
                 processNum.Text = Request.QueryString["pNum"].ToString();
                 resourcesNum.Text = Request.QueryString["rNum"].ToString();
                 availableNum.Text = Request.QueryString["aNum"].ToString();
-                string max = Request.QueryString["max"].ToString(); ;
-                string allo = Request.QueryString["allo"].ToString(); ;
+                string max = Request.QueryString["max"].ToString();
+                string allo = Request.QueryString["allo"].ToString();
 
                 DataTable dt = new DataTable();
                 dt.Columns.Add(new DataColumn("c0", typeof(string)));

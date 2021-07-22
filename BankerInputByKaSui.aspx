@@ -81,12 +81,9 @@
                 else {
                     c = j1.style.backgroundColor;
                     c = c.toUpperCase();
-                    if (c == "RGB(255, 255, 255)") {
-                        //flag = 1;
-                    } else {
+                    if (c != "RGB(255, 255, 255)") {
                         flag = 0;
                     }
-                    //flag = 1;
                 }
 
                 if (j2.value.replace(/(^\s*)|(\s*$)/g, "") == "") {
@@ -96,12 +93,9 @@
                 else {
                     c = j2.style.backgroundColor;
                     c = c.toUpperCase();
-                    if (c == "RGB(255, 255, 255)") {
-                        //flag = 1;
-                    } else {
+                    if (c != "RGB(255, 255, 255)") {
                         flag = 0;
                     }
-                    //flag = 1;
                 }
             }
 
@@ -113,12 +107,9 @@
             else {
                 c = j3.style.backgroundColor;
                 c = c.toUpperCase();
-                if (c == "RGB(255, 255, 255)") {
-                    //flag = 1;
-                } else {
+                if (c != "RGB(255, 255, 255)") {
                     flag = 0;
                 }
-                //flag = 1;
             }
 
             if (flag == 0) {

@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>银行家算法输出界面</title>
+    <title>银行家算法操作界面</title>
     <style type="text/css">
         .bordery{
             border-right:solid 2px #000000
