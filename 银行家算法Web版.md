@@ -1,65 +1,125 @@
-# BankerWebByKaSui
-基于ASP.NET和JS的银行家算法Web版
+# 银行家算法Web版
 
-一、实验目的
+## 一、实验目的
+
 做一个银行家算法Web版，更加了解银行家算法。
-二、实验要求
-1.实现形式：web页面。
-2.实现技术：从下面3个选项中任选一个：
-·APS.NET+JS
-·JAVA+JS
-·纯JQuery
-3.写明算法的实现过程。
-4.考勤签到。
-5.撰写实验报告。
 
-三、环境说明
+
+
+## 二、实验要求
+
+1. 实现形式：web页面。
+
+2. 实现技术：从下面3个选项中任选一个：
+
+	·APS.NET+JS
+
+	·JAVA+JS
+
+	·纯JQuery
+
+3. 写明算法的实现过程。
+
+4. 考勤签到。
+
+5. 撰写实验报告。
+
+ 
+
+## 三、**环境说明**
+
 Windows 10 企业版 LTSC Version 1809 x64
+
 Visual Studio Community 2019 16.7.4
+
 Brave 浏览器 1.26.74 Chromium: 91.0.4472.124
 
-四、实验步骤
-1.设计银行家算法初始界面
-（1）页面截图
+ 
+
+## 四、实验步骤
+
+### 1. 设计银行家算法初始界面
+
+#### （1） 页面截图
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps1.jpg) 
 
 图4.1.1-1 银行家算法初始界面
 
-（2）前端关键代码
+ 
+
+#### （2） 前端关键代码
+
+```asp
 //RequiredFieldValidator组件，判断textbox是否为空
 <asp:RequiredFieldValidator ID="pnIsNull" runat="server" ControlToValidate="inputProcessNum" ErrorMessage="必填" Height="20px"></asp:RequiredFieldValidator>
 
 //RegularExpressionValidator组件，判断textbox非法输入
 <asp:RegularExpressionValidator ID="pnIntBigTo0" runat="server" ControlToValidate="inputProcessNum" ErrorMessage="应为大于0的整数" Height="20px" ValidationExpression="^\+?[1-9][0-9]*$"></asp:RegularExpressionValidator>
+```
 
-（3）后端关键代码
+ 
+
+#### （3） 后端关键代码
+
+```c#
 //传输数据到下一个页面
 Response.Redirect("BankerInputByKaSui.aspx?processNum=" + inputProcessNum.Text + "&resourcesNum=" + inputResourcesNum.Text);
+```
 
-2.设计银行家算法输入界面
-（1）页面截图
+ 
+
+### 2. **设计银行家算法输入界面**
+
+#### （1） 页面截图
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps2.jpg) 
 
 图4.2.1-1 银行家算法输入界面
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps3.jpg) 
 
 图4.2.1-2 Alloction>Max（1）
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps4.jpg) 
 
 图4.2.1-3 Alloction>Max（2）
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps5.jpg) 
 
 图4.2.1-4 输入数据与资源种类数不匹配（1）
 
+ 
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps6.jpg) 
 
 图4.2.1-5 输入数据与资源种类数不匹配（2）
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps7.jpg) 
 
 图4.2.1-6 数据未输入
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps8.jpg) 
 
 图4.2.1-7 数据输入有误时下一步
 
-（2）前端关键代码
+ 
+
+#### （2） 前端关键代码
+
+```asp
 //css设计
 <style type="text/css">
     //textbox css
@@ -69,13 +129,13 @@ Response.Redirect("BankerInputByKaSui.aspx?processNum=" + inputProcessNum.Text +
         border:1px solid #c0c4c0;
         margin-bottom:4px;
         background-color:#FFFFFF;
-}
+    }
     //界面竖向对齐 css
     .column{
         float:left;
         width:33.33%;
         text-align:center;
-}
+    }
 //进程名与textbox对齐 css
     .spanp{
         line-height:29px;
@@ -108,8 +168,8 @@ Response.Redirect("BankerInputByKaSui.aspx?processNum=" + inputProcessNum.Text +
         obj.style.backgroundColor = '#FFFFFF';
         return true;
     }
-//判断输入Allocation是否大于Max
-function cmp(obj1, obj2) {
+    //判断输入Allocation是否大于Max
+    function cmp(obj1, obj2) {
         if (!checkdata(obj1) || !checkdata(obj2)) return false;
         var s1 = obj1.value.replace(/(^\s*)|(\s*$)/g, "");
         var s2 = obj2.value.replace(/(^\s*)|(\s*$)/g, "");
@@ -175,23 +235,26 @@ function cmp(obj1, obj2) {
         }
     }
 </script>
+```
 
-（3）后端代码设计
+ 
+
+#### （3） 后端代码设计
+
+```c#
 //从上一个页面获取数据
 if (Request.QueryString["processNum"] == null)
-    {
-        Response.Redirect("BankerMainByKaSui.aspx");
-    }
+{
+    Response.Redirect("BankerMainByKaSui.aspx");
+}
 processNum.Text = Request.QueryString["processNum"].ToString();
 if (Request.QueryString["resourcesNum"] == null)
-    {
-        Response.Redirect("BankerMainByKaSui.aspx");
+{
+    Response.Redirect("BankerMainByKaSui.aspx");
 }
 resourcesNum.Text = Request.QueryString["resourcesNum"].ToString();
-
 //给(textbox)inputAvailableNum添加检查数据的JS函数checkdata(obj)
 inputAvailableNum.Attributes.Add("onblur", "checkdata(this)");
-
 //自动生成需要的textbox
 TextBox tb;
 Label lb;
@@ -226,7 +289,6 @@ for(int i = 2; i <= int.Parse(processNum.Text); i++)
     tb.Attributes.Add("onblur", "cmp(max" + i + ",allo" + i + ")");
     alloPH.Controls.Add(tb);
 }
-
 //传参的下一个页面
 string pNum = processNum.Text;
 string rNum = resourcesNum.Text;
@@ -241,49 +303,94 @@ for (int i=2; i<= int.Parse(pNum); i++)
     allo += Request.Form["allo" + i].ToString().Trim();
 }
 Response.Redirect("BankerOutputByKaSui.aspx?pNum=" + pNum + "&rNum=" + rNum+ "&aNum="+ aNum+"&max="+max+"&allo="+allo);
+```
 
-3.设计银行家算法操作界面
-（1）页面截图
+ 
+
+### 3. **设计银行家算法操作界面**
+
+#### （1） 页面截图
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps9.jpg) 
 
 图4.2.3-1 银行家算法操作界面
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps10.jpg) 
 
 图4.2.3-2 银行家算法不安全状态
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps11.jpg) 
 
 图4.2.3-3 银行家算法申请资源不足阻塞（1）
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps12.jpg) 
 
 图4.2.3-4 银行家算法申请资源不足阻塞（2）
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps13.jpg) 
 
 图4.2.3-5 申请资源超过Need
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps14.jpg) 
 
 图4.2.3-6 银行家算法申请不安全阻塞（1）
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps15.jpg) 
 
 图4.2.3-7 银行家算法申请不安全阻塞（2）
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps16.jpg) 
 
 图4.2.3-8 银行家算法释放资源解除阻塞（1）
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps17.jpg) 
 
 图4.2.3-9 银行家算法释放资源解除阻塞（2）
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps18.jpg) 
 
 图4.2.3-10 银行家算法新建进程
 
+ 
+
+![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11220\wps19.jpg) 
 
 图4.2.3-11 银行家算法新建进程无法满足资源需求
 
-（2）前端关键代码
+ 
+
+#### （2） 前端关键代码
+
+```asp
 //使用Panel 控件隐藏局部页面
 <asp:Panel ID="app" runat="server" Visible="False">
     ……
 </asp:Panel>
+```
 
-（3）后端关键代码
+ 
+
+#### （3） 后端关键代码
+
+```c#
 //安全算法
 private int safe(DataTable dt1, string avail, out ArrayList safelist)
 {
@@ -320,7 +427,7 @@ private int safe(DataTable dt1, string avail, out ArrayList safelist)
 protected void Page_Load(object sender, EventArgs e)
 {
     if (!IsPostBack)
-{
+	{
         //处理上一个页面来的参数
         if (Request.QueryString["pNum"] == null) Response.Redirect("BankerMainByKaSui.aspx");
         processNum.Text = Request.QueryString["pNum"].ToString();
@@ -689,67 +796,128 @@ protected void p3yesBtn_Click(object sender, EventArgs e)
     {
         Response.Write("<script>alert('系统无法满足新进程"+inputPName.Text+"的资源露求，创建失败!')</script>");
         tip.Text = "创建新进程失败!";
+	}
 }
-}
+```
 
-五、问题解决
-1.初始界面使用了哪些验证控件，设置了什么属性？
+ 
+
+## 五、**问题解决**
+
+1. 初始界面使用了哪些验证控件，设置了什么属性？
+
 使用了RequiredFieldValidator，使其ControlToValidate="inputProcessNum" ErrorMessage="必填"，在输入为空时提示“必填”；
+
 使用了RegularExpressionValidator控件，使其ControlToValidate="inputProcessNum" ErrorMessage="应为大于0的整数" ValidationExpression="^\+?[1-9][0-9]*$"，在有其他非法输入时提示"应为大于0的整数" 。
 
-2.页面跳转有哪些方法？
+ 
+
+2. 页面跳转有哪些方法？
+
 最常用的页面跳转（原窗口被替代）：Response.Redirect("XXX.aspx");
+
 利用url地址打开本地网页或互联网：Respose.Write("<script language='javascript'>window.open('"+ url+"');</script>");
+
 原窗口保留再新打开另一个页面（浏览器可能阻止，需要解除）：Response.Write("<script>window.open('xxxx.aspx','_blank')</script>");
+
 效果同1中的另一种写法：Response.Write("<script>window.location='xxxx.aspx'</script>");
+
 常用于传递session变量的页面跳转 （原窗口被替代）：Server.Transfer("XXX.aspx");
+
 原窗口保留，以对话框形式打开新窗口：Response.Write("<script>window.showModelessDialog('XXX.aspx')</script>");
+
 对话框形式打开新窗口，原窗口被代替：Response.Write("<script>window.showModelDialog('XXX.aspx')</script>");
+
 打开简洁窗口：Respose.Write("<script language='javascript'>window.open('"+url+"','','resizable=1,scrollbars=0,status=1,menubar=no,toolbar=no,location=no, menu=no');</script>");
-利用vs端口：System.Diagnostics.Process.Start(http://localhost:3210/xxxx.aspx);
 
-3.输入页面输入不正确时页面上回有什么反应？
-具体参照 四、实验步骤/2.设计银行家算法输入界面/（1）页面截图 。
+利用vs端口：System.Diagnostics.Process.Start([http://localhost:3210/xxxx.aspx](http://localhost:3210/系统管理员.aspx));
 
-4.如何让测试输入页面JS方法的正确性？
-每个非法输入都是一边。也可参照 四、实验步骤/2.设计银行家算法输入界面/（1）页面截图 。
+ 
 
-5.submitcheck()方法怎么判断文本框的输入？
+3. 输入页面输入不正确时页面上回有什么反应？
+
+具体参照 [**四、实验步骤/2.设计银行家算法输入界面/（1）页面截图**](#p3and4) 。
+
+ 
+
+4. 如何让测试输入页面JS方法的正确性？
+
+每个非法输入都是一边。也可参照 [**四、实验步骤/2.设计银行家算法输入界面/（1）页面截图**](#p3and4) 。
+
+ 
+
+5. submitcheck()方法怎么判断文本框的输入？
+
 textbox是否为空，textbox的背景色是否为白色。
 
-6.操作界面为什么使用了panel控件，有什么好处？
+ 
+
+6. 操作界面为什么使用了panel控件，有什么好处？
+
 每次使用按钮都会刷新页面，保证数据的更新，也使页面更加简介。
 
-7.创建基本表时的DataTable、DataRow和ViewState是什么？
+ 
+
+7. 创建基本表时的DataTable、DataRow和ViewState是什么？
+
 DataTable是数据表，DataRow是数据行和ViewState是数据值。
 
-8.创建的DataTable表长什么样？
-具体参照 四、实验步骤/3.设计银行家算法操作界面/（1）页面截图 。
+ 
 
-9.GridView控件的数据源是什么，如何把数据显示在GridView中？
-GridView控件的数据源是DataTable。数据显示代码具体参照 四、实验步骤/3.设计银行家算法操作界面/（3）后端关键代码///Page_Load///生成表 。
+8. 创建的DataTable表长什么样？
 
-10.系统资源总数为x时，GridView有几列，max从第几列开始，allocation从第几列开始，need从第几列开始（列标号从0开始）？
+具体参照 [**四、实验步骤/3.设计银行家算法操作界面/（1）页面截图**](#p8) 。
+
+ 
+
+9. GridView控件的数据源是什么，如何把数据显示在GridView中？
+
+GridView控件的数据源是DataTable。数据显示代码具体参照 [**四、实验步骤/3.设计银行家算法操作界面/（3）后端关键代码///Page_Load///生成表**](#p9) 。
+
+ 
+
+10. 系统资源总数为x时，GridView有几列，max从第几列开始，allocation从第几列开始，need从第几列开始（列标号从0开始）？
+
 共有3*x+1列，max从第1列开始，allocation从第1+x列开始，need从第1+2*x列开始。
 
-11.创建表头时调用ColumnSpan属性的作用是什么
+ 
+
+11. 创建表头时调用ColumnSpan属性的作用是什么
+
 确认这个表头占几列。
 
-12.安全算法如果安全，返回值是多少，安全序列通过什么返回？
+ 
+
+12. 安全算法如果安全，返回值是多少，安全序列通过什么返回？
+
 如果安全，返回（int）1，安全序列通过out ArrayList safelist返回。
 
-13.如何查询DataTable中符合条件的记录，如何删除DataTable中的特定行？
+ 
+
+13. 如何查询DataTable中符合条件的记录，如何删除DataTable中的特定行？
+
 设置查询条件exp，使用DataTable.Select(exp)查询；查找出要删除的记录dr，使用DataTable.Rows.Remove(dr[0])删除特定行。
 
-14.如何将need=0的进程排除在申请列表外，代码是什么？
-具体参照 四、实验步骤/3.设计银行家算法操作界面/（3）后端关键代码///申请时排除need=0和阻塞的过滤器 。 
+ 
 
-15.被阻塞进程的request数据存放对象定义应该放在那里？
+14. 如何将need=0的进程排除在申请列表外，代码是什么？
+
+具体参照 [**四、实验步骤/3.设计银行家算法操作界面/（3）后端关键代码///申请时排除need=0和阻塞的过滤器**](#p14) 。 
+
+ 
+
+15. 被阻塞进程的request数据存放对象定义应该放在那里？
+
 放在Page_Load里面。
 
-16.关于部分浏览器textbox的背景色返回的RGB值的解决方法。
-使用textbox.style.backgroundColor = "RGB(255, 255, 255)"，或者textbox.style.backgroundColor = "RGB(255, 255, 255)" or textbox.style.backgroundColor = "#FFFFFF" 两个都放上。具体参照 四、实验步骤/2.设计银行家算法输入界面/（2）前端关键代码///判断输入是否为空，判断输入是否全部正确 。
+ 
 
+16. 关于部分浏览器textbox的背景色返回的RGB值的解决方法。
 
-六、实验总结
+使用textbox.style.backgroundColor = "RGB(255, 255, 255)"，或者textbox.style.backgroundColor = "RGB(255, 255, 255)" or textbox.style.backgroundColor = "#FFFFFF" 两个都放上。具体参照 [**四、实验步骤/2.设计银行家算法输入界面/（2）前端关键代码/****//判断输入是否为空，判断输入是否全部正确** 。](#p16)
+
+ 
+
+## 六、**实验总结**
+
 对银行家和死锁有一定理解。UI啊懒得设计，不同浏览器textbox背景色返回值啊还不一样，前端再见。
